@@ -1,0 +1,20 @@
+{
+  "name": "apprun-leaflet",
+  "version": "1.0.0",
+  "description": "simple Apprun JSX Wraper for leaflet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanLPalacios/apprun-leaflet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanLPalacios/apprun-leaflet/issues"
+  },
+  "homepage": "https://github.com/JuanLPalacios/apprun-leaflet#readme"
+}
