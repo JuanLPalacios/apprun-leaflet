@@ -16,5 +16,27 @@
   "bugs": {
     "url": "https://github.com/JuanLPalacios/apprun-leaflet/issues"
   },
-  "homepage": "https://github.com/JuanLPalacios/apprun-leaflet#readme"
+  "homepage": "https://github.com/JuanLPalacios/apprun-leaflet#readme",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/leaflet": "1.7.11",
+    "@types/marked": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "apprun": "^3.28.7",
+    "eslint": "^8.2.0",
+    "jest": "^27.3.1",
+    "marked": "^4.0.10",
+    "source-map-loader": "^3.0.0",
+    "ts-jest": "^27.0.7",
+    "ts-loader": "^9.2.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "leaflet": "1.8.0"
+  }
 }
