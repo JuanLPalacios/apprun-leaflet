@@ -4,7 +4,7 @@
   "description": "simple Apprun JSX Wraper for leaflet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -17,16 +17,13 @@
     "url": "https://github.com/JuanLPalacios/apprun-leaflet/issues"
   },
   "homepage": "https://github.com/JuanLPalacios/apprun-leaflet#readme",
-  "scripts": {
-    "test": "jest --watch"
-  },
   "devDependencies": {
     "@types/jest": "^27.0.2",
-    "@types/leaflet": "1.7.11",
+    "@types/leaflet": "^1.7.11",
     "@types/marked": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
-    "apprun": "^3.28.7",
+    "apprun": "^3.28.15",
     "eslint": "^8.2.0",
     "jest": "^27.3.1",
     "marked": "^4.0.10",
@@ -34,7 +31,7 @@
     "ts-jest": "^27.0.7",
     "ts-loader": "^9.2.6",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "leaflet": "1.8.0"
