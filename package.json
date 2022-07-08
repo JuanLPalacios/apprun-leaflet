@@ -4,6 +4,8 @@
   "description": "simple Apprun JSX Wraper for leaflet",
   "main": "index.js",
   "scripts": {
+    "clean": "rd /s /q dist",
+    "build": "npm run clean && npx tsc && copy \".\\README.md\" \".\\dist\" && copy \".\\package.json\" \".\\dist\"",
     "test": "jest --watch"
   },
   "repository": {

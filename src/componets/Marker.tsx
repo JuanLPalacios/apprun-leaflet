@@ -4,7 +4,8 @@ import {
   Marker as LeafletMarker, MarkerOptions,
 } from 'leaflet';
 import app, { Component, VNode } from 'apprun';
-import { EventedProps } from '../@types/EventedProps';
+import { EventedProps } from '../types/EventedProps';
+import { ContextBased } from '../types/ContextBased';
 
 export interface MarkerProps extends MarkerOptions, EventedProps {
   children?: VNode[]
@@ -14,7 +15,7 @@ export interface MarkerProps extends MarkerOptions, EventedProps {
 export class Marker extends Component<MarkerProps> {
   marker:LeafletMarker;
 
-  constructor(props:IContextBased<MarkerProps>,...p){
+  constructor(props:ContextBased<MarkerProps>,...p){
     super(props,...p);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { position, children, ...options } = props;
@@ -30,10 +31,10 @@ export class Marker extends Component<MarkerProps> {
     </div>;
   };
 
-  mounted = (props: IContextBased<MarkerProps>, children: any[], state: IContextBased<MarkerProps>) => {
+  mounted = (props: ContextBased<MarkerProps>, children: any[], state: ContextBased<MarkerProps>) => {
 
     const { context } = state;
-    state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{...node.props,context} } : node );
+    state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props,context } } : node );
     this.updateMarker(this.marker, props, state);
     return { ...props, children };
   };
@@ -41,8 +42,7 @@ export class Marker extends Component<MarkerProps> {
   updateMarker(marker, props, prevProps) {
     if (props.context !== prevProps.context) {
       if(prevProps.context) {marker.remove();}
-      const a = marker.addTo(props.context);
-      console.log(a);
+      marker.addTo(props.context);
     }
     if (props.icon != null && props.icon !== prevProps.icon) {
       marker.setIcon(props.icon);

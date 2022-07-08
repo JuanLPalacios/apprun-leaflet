@@ -41,7 +41,7 @@ export class Map extends Component<MapContainerProps> {
         typeof node === 'string'?
           node :
           (
-            (node.tag as any).prototype instanceof Component? { ...node, props:{...node.props ,context} } : node
+            (node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props ,context } } : node
           )
       )
     ) : (
@@ -71,11 +71,11 @@ export class Map extends Component<MapContainerProps> {
         }
       }}/>}
       {contents}
-  </div>;
+    </div>;
   };
 
   update = {
-    'setContext': (state, map, props) => {
+    'setContext': (state, map) => {
       this.map = map;
       return state;
     }
