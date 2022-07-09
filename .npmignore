@@ -1,0 +1,9 @@
+# Node generated files
+npm-debug.log
+node_modules
+docs
+demo
+tests
+.vscode
+# NPM test packages
+*.tgz

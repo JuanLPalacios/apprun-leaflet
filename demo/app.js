@@ -1,0 +1,2 @@
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports={}:"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports["apprun-leaflet"]={}:e["apprun-leaflet"]={}}(this,(()=>({})));
+//# sourceMappingURL=app.js.map
