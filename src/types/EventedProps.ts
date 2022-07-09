@@ -1,5 +1,5 @@
 import { LeafletEventHandlerFnMap } from 'leaflet';
 
-type EventedProps = {
+export type EventedProps = {
   eventHandlers?: LeafletEventHandlerFnMap
 }

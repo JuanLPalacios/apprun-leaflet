@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "reactNamespace": "app",
     "lib": ["dom", "es2015", "es5"],
+		"outDir": "../esm",
     "experimentalDecorators": true,
     "sourceMap": true,
 		"esModuleInterop": true,
