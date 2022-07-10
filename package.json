@@ -4,7 +4,7 @@
   "description": "simple Apprun JSX Wraper for leaflet",
   "main": "dist/apprun-leaflet.js",
   "module": "dist/apprun-leaflet.esm.js",
-  "types": "apprun-leaflet.d.ts",
+  "types": "dist/types/apprun-leaflet.d.ts",
   "type": "module",
   "scripts": {
     "clean": "rd /s /q dist",
