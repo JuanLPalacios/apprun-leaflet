@@ -55,15 +55,11 @@ export class Map extends Component<MapContainerProps> {
         if (node !== null && !context) {
           const { style, id, className } = node;
           const map = new LeafletMap(node, options);
-          //const map = new LeafletMap('map').setView([51.505, -0.09], 13);
-          // eslint-disable-next-line eqeqeq
           if (center != null && zoom != null) {
             map.setView(center, zoom);
-            // eslint-disable-next-line eqeqeq
           } else if (bounds != null) {
             map.fitBounds(bounds, boundsOptions);
           }
-          // eslint-disable-next-line eqeqeq
           if (whenReady != null) {
             map.whenReady(whenReady);
           }
@@ -82,6 +78,26 @@ export class Map extends Component<MapContainerProps> {
   };
 
   mounted = (props: MapContainerProps, children: any[], state: MapContainerProps) => {
+    const map = this.map;
+    if (props.center != null && props.center !== state.center) {
+      map.setView(props.center);
+    }
+    if (props.zoom != null && props.zoom !== state.zoom) {
+      map.setZoom(props.zoom);
+    }
+    if (props.bounds != null && props.bounds !== state.bounds) {
+      map.fitBounds(props.bounds);
+    }
+    if (props.whenReady != null) {
+      map.whenReady(props.whenReady);
+    }
     return { ...state, ...props, children };
+  };
+  
+  unload = (state: MapContainerProps) => {
+    delete state.center;
+    delete state.zoom;
+    delete state.bounds;
+    this.setState({...state});
   };
 }
