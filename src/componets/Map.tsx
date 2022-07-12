@@ -10,6 +10,7 @@ export interface MapContainerProps extends MapOptions {
   bounds?: LatLngBoundsExpression
   boundsOptions?: FitBoundsOptions
   children?: Array<VNode | string>
+  class?: string
   className?: string
   id?: string
   placeholder?: VNode | string
@@ -28,6 +29,7 @@ export class Map extends Component<MapContainerProps> {
       boundsOptions,
       center,
       children,
+      class:_class,
       className,
       id,
       placeholder,
@@ -48,7 +50,7 @@ export class Map extends Component<MapContainerProps> {
     );
     const node = this.conainer;
     return <div>
-      {node || <div {...{ style, id, className }} ref={(node: HTMLDivElement | null) => {
+      {node || <div {...{ style, id, className, class:_class }} ref={(node: HTMLDivElement | null) => {
         if(node) { this.conainer = node; }
         const context = this.map;
         if (node !== null && !context) {
