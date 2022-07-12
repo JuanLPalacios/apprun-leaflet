@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 import {
   LatLngExpression,
   Marker as LeafletMarker, MarkerOptions,
@@ -18,8 +17,8 @@ export class Marker extends Component<MarkerProps> {
   constructor(props:ContextBased<MarkerProps>,...p){
     super(props,...p);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { position, children, ...options } = props;
-    this.marker = new LeafletMarker(position, options);
+    const { position, children } = props;
+    this.marker = new LeafletMarker(position, props);
     if(props.context) {
       this.marker.addTo(props.context);
     }
@@ -35,33 +34,30 @@ export class Marker extends Component<MarkerProps> {
 
     const { context } = state;
     state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props,context } } : node );
-    this.updateMarker(this.marker, props, state);
-    return { ...props, children };
-  };
-
-  updateMarker(marker, props, prevProps) {
-    if (props.context !== prevProps.context) {
-      if(prevProps.context) {marker.remove();}
+    const marker = this.marker;
+    if (props.context !== state.context) {
+      if(state.context) {marker.remove();}
       marker.addTo(props.context);
     }
-    if (props.icon != null && props.icon !== prevProps.icon) {
+    if (props.icon != null && props.icon !== state.icon) {
       marker.setIcon(props.icon);
     }
     if (
       props.zIndexOffset != null &&
-      props.zIndexOffset !== prevProps.zIndexOffset
+      props.zIndexOffset !== state.zIndexOffset
     ) {
       marker.setZIndexOffset(props.zIndexOffset);
     }
-    if (props.opacity != null && props.opacity !== prevProps.opacity) {
+    if (props.opacity != null && props.opacity !== state.opacity) {
       marker.setOpacity(props.opacity);
     }
-    if (marker.dragging != null && props.draggable !== prevProps.draggable) {
+    if (marker.dragging != null && props.draggable !== state.draggable) {
       if (props.draggable === true) {
         marker.dragging.enable();
       } else {
         marker.dragging.disable();
       }
     }
-  }
+    return { ...props, children };
+  };
 }

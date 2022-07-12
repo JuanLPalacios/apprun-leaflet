@@ -33,8 +33,7 @@ export class Map extends Component<MapContainerProps> {
       placeholder,
       style,
       whenReady,
-      zoom,
-      ...options
+      zoom
     } = state;
     const contents = context ? (
       children?.map(node=>
@@ -53,8 +52,7 @@ export class Map extends Component<MapContainerProps> {
         if(node) { this.conainer = node; }
         const context = this.map;
         if (node !== null && !context) {
-          const { style, id, className } = node;
-          const map = new LeafletMap(node, options);
+          const map = new LeafletMap(node, state);
           if (center != null && zoom != null) {
             map.setView(center, zoom);
           } else if (bounds != null) {
@@ -63,7 +61,7 @@ export class Map extends Component<MapContainerProps> {
           if (whenReady != null) {
             map.whenReady(whenReady);
           }
-          this.run('setContext', map, { style, id, className });
+          this.run('setContext', map);
         }
       }}/>}
       {contents}

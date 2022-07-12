@@ -16,7 +16,6 @@ export class Layer<T extends LeafletLayer, E extends LayerProps> extends Compone
 
   constructor(props:ContextBased<E>,...p){
     super(props,...p);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   }
 
   view = (state = this.state) => {
@@ -51,6 +50,5 @@ export class Layer<T extends LeafletLayer, E extends LayerProps> extends Compone
     return (new LeafletLayer(props) as T);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  updateLayer = (layer:T, props:ContextBased<E>, prevProps:ContextBased<E>)=>{  };
+  updateLayer = (layer:T, props:ContextBased<E>, prevProps:ContextBased<E>)=>{};
 }

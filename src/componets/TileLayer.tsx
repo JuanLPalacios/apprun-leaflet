@@ -13,7 +13,6 @@ export class TileLayer extends Layer<LeafletTileLayer, TileLayerProps> {
   };
 
   updateLayer = (layer:LeafletTileLayer, props:ContextBased<TileLayerProps>, prevProps:ContextBased<TileLayerProps>)=>{
-    // eslint-disable-next-line eqeqeq
     if (props.url != null && props.url !== prevProps.url) {
       layer.setUrl(props.url);
     }
