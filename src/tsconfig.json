@@ -1,0 +1,19 @@
+
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "../dist/types",
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "reactNamespace": "app",
+    "lib": ["dom", "es2015", "es5"],
+		"outDir": "../esm",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"skipLibCheck": true
+  },
+}
