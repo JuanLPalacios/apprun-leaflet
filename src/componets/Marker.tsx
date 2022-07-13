@@ -16,8 +16,7 @@ export class Marker extends Component<MarkerProps> {
 
   constructor(props:ContextBased<MarkerProps>,...p){
     super(props,...p);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { position, children } = props;
+    const { position } = props;
     this.marker = new LeafletMarker(position, props);
     if(props.context) {
       this.marker.addTo(props.context);
@@ -31,9 +30,8 @@ export class Marker extends Component<MarkerProps> {
   };
 
   mounted = (props: ContextBased<MarkerProps>, children: any[], state: ContextBased<MarkerProps>) => {
-
-    const { context } = state;
-    state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props,context } } : node );
+    const context = this.marker
+    state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props, context } } : node );
     const marker = this.marker;
     if (props.context !== state.context) {
       if(state.context) {marker.remove();}
