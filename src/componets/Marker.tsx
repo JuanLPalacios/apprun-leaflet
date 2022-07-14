@@ -24,14 +24,19 @@ export class Marker extends Component<MarkerProps> {
   }
 
   view = (state = this.state) => {
+    const context = this.marker
+    state.children = state.children?.map(node=>
+      typeof node === 'string'?
+        node :(
+          (node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props ,context } } : node
+        )
+      );
     return <div>
       {state.children}
     </div>;
   };
 
   mounted = (props: ContextBased<MarkerProps>, children: any[], state: ContextBased<MarkerProps>) => {
-    const context = this.marker
-    state.children = state.children?.map(node=>(node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props, context } } : node );
     const marker = this.marker;
     if (props.context !== state.context) {
       if(state.context) {marker.remove();}
