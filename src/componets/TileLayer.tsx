@@ -8,8 +8,8 @@ export interface TileLayerProps extends TileLayerOptions, ContainerProps {
 
 export class TileLayer extends Container<LeafletTileLayer, TileLayerProps> {
   createLayer(props: ContextBased<TileLayerProps>): LeafletTileLayer {
-    const { url, ...options } = props;
-    return new LeafletTileLayer(url, options);
+    const { url, context } = props;
+    return new LeafletTileLayer(url, props).addTo(context);
   };
 
   updateLayer(layer: LeafletTileLayer, props: ContextBased<TileLayerProps>, prevProps: ContextBased<TileLayerProps>): void {

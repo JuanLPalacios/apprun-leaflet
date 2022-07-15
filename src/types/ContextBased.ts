@@ -1,3 +1,3 @@
-export type ContextBased<T> = T & {
-    context?:any
+export type ContextBased<T, E = any> = T & {
+    context?:E
 };

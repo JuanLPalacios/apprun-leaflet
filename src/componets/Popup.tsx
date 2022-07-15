@@ -1,58 +1,38 @@
 import {
   LatLngExpression,
+  Layer,
+  Map,
   Popup as PopupMarker,
   PopupOptions,
 } from 'leaflet';
 import app, { Component, VNode } from 'apprun';
 import { EventedProps } from '../types/EventedProps';
 import { ContextBased } from '../types/ContextBased';
+import { Container } from '../abstracts/Container';
 
 export interface PopupProps extends PopupOptions, EventedProps, ContextBased<{}> {
   children?: VNode[]
   position?: LatLngExpression
 }
 
-export class Popup extends Component<PopupProps> {
-  popup:PopupMarker;
-
-  view = (state = this.state) => {
-    const { context:container } = state;
-    if ((!this.popup) ) {
-      if(this.popup) {this.popup.remove();}
-      container.bindPopup("");
-      this.popup = container.getPopup();
+export class Popup extends Container<PopupMarker, PopupProps, Layer | Map> {
+  createLayer(props: ContextBased<PopupProps, any>): PopupMarker {
+    const popup = new PopupMarker(props)
+    const {context} = props
+    if(context instanceof Layer){
+      context.bindPopup(popup);
+    } else if( context instanceof Map){
+      popup.openOn(context)
     }
-    const popup = this.popup;
-    const context = this.popup;
-    state.children = state.children?.map(node=>
-      (typeof node) === 'string'?
-        node :(
-          (node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props ,context } } : node
-        )
-    );
-    return (Array.isArray(state.children) && (state.children.length > 1))?
-    <div ref={(node) => {console.log(node);popup.setContent(node)}} >
-      {state.children}
-    </div> : 
-    (typeof state.children[0] === 'string'?
-      (()=>{
-        ((node)=>{console.log(node);popup.setContent(node)})(state.children[0] as any as string);
-        return <>{state.children}</>
-      })():
-      {...state.children[0], props:{...state.children[0].props, ref:(node)=>{console.log(node);popup.setContent(node)}}}
-    )
-  };
-
-  mounted = (props: ContextBased<PopupProps>, children: any[], state: ContextBased<PopupProps>) => {
-    const { context } = state;
-    if ( (props.context !== state.context) || (!this.popup) ) {
-      if(this.popup) {this.popup.remove();}
-      context.bindPopup("");
-      this.popup = context.getPopup();
+    return popup
+  }
+  updateLayer(popup: PopupMarker, props: ContextBased<PopupProps, any>, prevProps: ContextBased<PopupProps, any>): void {
+    if (props.position != null && props.position !== prevProps.position) {
+      popup.setLatLng(props.position);
     }
-    if (props.position != null && props.position !== state.position) {
-      this.popup.setLatLng(props.position);
-    }
-    return { ...props, children };
+  }
+  
+  contentRendered = (popup: PopupMarker, props: ContextBased<PopupProps, any>, contents: HTMLElement) => {
+    popup.setContent(contents)
   };
 }

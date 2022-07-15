@@ -1,66 +1,47 @@
 import {
   LatLngExpression,
+  LayerGroup,
+  Map,
   Marker as LeafletMarker, MarkerOptions,
 } from 'leaflet';
 import app, { Component, VNode } from 'apprun';
 import { EventedProps } from '../types/EventedProps';
 import { ContextBased } from '../types/ContextBased';
+import { LayerProps } from './Layer';
+import { Container, ContainerProps } from '../abstracts/Container';
 
-export interface MarkerProps extends MarkerOptions, EventedProps {
-  children?: VNode[]
+export interface MarkerProps extends MarkerOptions, ContainerProps {
   position: LatLngExpression
 }
 
-export class Marker extends Component<MarkerProps> {
-  marker:LeafletMarker;
-
-  constructor(props:ContextBased<MarkerProps>,...p){
-    super(props,...p);
+export class Marker extends Container<LeafletMarker, MarkerProps, Map | LayerGroup> {
+  createLayer(props: ContextBased<MarkerProps, any>): LeafletMarker<any> {
     const { position } = props;
-    this.marker = new LeafletMarker(position, props);
-    if(props.context) {
-      this.marker.addTo(props.context);
-    }
+    return new LeafletMarker(position, props).addTo(props.context);
   }
-
-  view = (state = this.state) => {
-    const context = this.marker
-    state.children = state.children?.map(node=>
-      typeof node === 'string'?
-        node :(
-          (node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props ,context } } : node
-        )
-      );
-    return <div>
-      {state.children}
-    </div>;
-  };
-
-  mounted = (props: ContextBased<MarkerProps>, children: any[], state: ContextBased<MarkerProps>) => {
-    const marker = this.marker;
-    if (props.context !== state.context) {
-      if(state.context) {marker.remove();}
+  updateLayer(marker: LeafletMarker<any>, props: ContextBased<MarkerProps, any>, prevProps: ContextBased<MarkerProps, any>): void {
+    if (props.context !== prevProps.context) {
+      if(prevProps.context) {marker.remove();}
       marker.addTo(props.context);
     }
-    if (props.icon != null && props.icon !== state.icon) {
+    if (props.icon != null && props.icon !== prevProps.icon) {
       marker.setIcon(props.icon);
     }
     if (
       props.zIndexOffset != null &&
-      props.zIndexOffset !== state.zIndexOffset
+      props.zIndexOffset !== prevProps.zIndexOffset
     ) {
       marker.setZIndexOffset(props.zIndexOffset);
     }
-    if (props.opacity != null && props.opacity !== state.opacity) {
+    if (props.opacity != null && props.opacity !== prevProps.opacity) {
       marker.setOpacity(props.opacity);
     }
-    if (marker.dragging != null && props.draggable !== state.draggable) {
+    if (marker.dragging != null && props.draggable !== prevProps.draggable) {
       if (props.draggable === true) {
         marker.dragging.enable();
       } else {
         marker.dragging.disable();
       }
     }
-    return { ...props, children };
-  };
+  }
 }

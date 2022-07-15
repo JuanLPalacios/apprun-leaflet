@@ -49,7 +49,7 @@ export class Map extends Component<MapContainerProps> {
       placeholder ?? null
     );
     const node = this.conainer;
-    return <div>
+    return <>
       {node || <div {...{ style, id, className, class:_class }} ref={(node: HTMLDivElement | null) => {
         if(node) { this.conainer = node; }
         const context = this.map;
@@ -66,8 +66,10 @@ export class Map extends Component<MapContainerProps> {
           this.run('setContext', map);
         }
       }}/>}
-      {contents}
-    </div>;
+      <div style={{display:'none'}}>
+        {contents}
+      </div>
+    </>;
   };
 
   update = {
