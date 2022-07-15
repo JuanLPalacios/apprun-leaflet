@@ -3,47 +3,41 @@ import { InteractiveLayerOptions, Layer as LeafletLayer, LayerOptions } from 'le
 import { ContextBased } from '../types/ContextBased';
 import { EventedProps } from '../types/EventedProps';
 
-export interface ContainerProps extends EventedProps, LayerOptions {
+export interface ContainerProps extends EventedProps {
     children?: Array<VNode | string>
 }
 
-export abstract class Container<T extends LeafletLayer, E extends ContainerProps> extends Component<E> {
-  layer?:T;
-  state!:ContextBased<E>;
+export abstract class Container<T, P extends ContainerProps, E = any> extends Component<P> {
+  context?:T;
+  state!:ContextBased<P,E>;
 
-  constructor(props:ContextBased<E>,...p){
+  constructor(props:ContextBased<P>,...p){
     super(props,...p);
+    this.context = this.createLayer(props);
   }
 
   view = (state = this.state) => {
-    if (!this.layer) {
-      this.layer = this.createLayer(state);
-    }
-    if(state.context) {
-      this.layer.addTo(state.context);
-    }
-    return <div>
-      {state.children}
-    </div>;
-  };
-
-  mounted = (props: ContextBased<E>, children: any[], state: ContextBased<E>) => {
-    const context = this.layer;
+    const context = this.context;
     state.children = state.children?.map(node=>
       typeof node === 'string'?
         node :(
           (node.tag as any).prototype instanceof Component? { ...node, props:{ ...node.props ,context } } : node
         )
     );
-    if (props.context !== state.context) {
-      if(state.context) {this.layer.remove();}
-      this.layer.addTo(props.context);
-    }
-    this.updateLayer(this.layer, props, state);
+    return <div ref={(node)=>this.contentRendered(context, state, node)}>
+      {state.children}
+    </div>;
+  };
+
+  mounted = (props: ContextBased<P>, children: any[], state: ContextBased<P>) => {
+    this.updateLayer(this.context, props, state);
     return { ...props, children };
   };
 
-  abstract createLayer(props:ContextBased<E>):T;
+  
+  contentRendered: (layer:T, props:ContextBased<P>, contents:HTMLElement) => void = ()=>{};
 
-  abstract updateLayer(layer:T, props:ContextBased<E>, prevProps:ContextBased<E>):void;
+  abstract createLayer(props:ContextBased<P>):T;
+
+  abstract updateLayer(layer:T, props:ContextBased<P>, prevProps:ContextBased<P>):void;
 }
