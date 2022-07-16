@@ -1,5 +1,5 @@
 import app,{ Component, VNode } from 'apprun';
-import { InteractiveLayerOptions, Layer as LeafletLayer, LayerOptions } from 'leaflet';
+import { Evented, InteractiveLayerOptions, Layer as LeafletLayer, LayerOptions } from 'leaflet';
 import { ContextBased } from '../types/ContextBased';
 import { EventedProps } from '../types/EventedProps';
 
@@ -7,13 +7,14 @@ export interface ContainerProps extends EventedProps {
     children?: Array<VNode | string>
 }
 
-export abstract class Container<T, P extends ContainerProps, E = any> extends Component<P> {
+export abstract class Container<T extends Evented, P extends ContainerProps, E = any> extends Component<P> {
   context?:T;
   state!:ContextBased<P,E>;
 
   constructor(props:ContextBased<P>,...p){
     super(props,...p);
-    this.context = this.createLayer(props);
+    this.context = this.createLayer(props).on(props.eventHandlers || {});
+
   }
 
   view = (state = this.state) => {
