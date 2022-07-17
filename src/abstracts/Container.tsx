@@ -32,6 +32,10 @@ export abstract class Container<T extends Evented, P extends ContainerProps, E =
 
   mounted = (props: ContextBased<P>, children: any[], state: ContextBased<P>) => {
     this.updateLayer(this.context, props, state);
+    this.context.on('popupopen', () =>
+    (this.context as any)._popup?._closeButton?.addEventListener('click', (event) => {
+      event.preventDefault();
+    }));
     return { ...props, children };
   };
 
