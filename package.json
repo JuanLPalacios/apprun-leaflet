@@ -1,6 +1,6 @@
 {
   "name": "apprun-leaflet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "simple Apprun JSX Wraper for leaflet",
   "main": "dist/apprun-leaflet.js",
   "module": "dist/apprun-leaflet.esm.js",

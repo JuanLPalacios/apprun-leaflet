@@ -2,7 +2,9 @@ import app, { Component, on } from 'apprun';
 import { LatLngTuple } from 'leaflet';
 import { Map } from '../src/componets/Map';
 import { Marker } from '../src/componets/Marker';
+import { Popup } from '../src/componets/Popup';
 import { TileLayer } from '../src/componets/TileLayer';
+import { Tooltip } from '../src/componets/Tooltip';
 
 class Home extends Component {
   state = {};
@@ -17,13 +19,25 @@ class Home extends Component {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position}/>
+          <Marker position={position}>
+            <Popup>
+              <div>
+                ayo
+                Popup for Marker
+              </div>
+            </Popup>
+            <Tooltip>
+              <div>
+                ayo
+              Tooltip for Marker
+              </div>
+            </Tooltip>
+          </Marker>
         </Map>
       </div>
     );
   };
 }
 
-console.log('hey');
 
 export default new Home().start('my-app');
