@@ -5,8 +5,9 @@ import {
   MapOptions,
 } from 'leaflet';
 import { app ,Component, VNode } from 'apprun';
+import { EventedProps } from '../apprun-leaflet';
 
-export interface MapContainerProps extends MapOptions {
+export interface MapContainerProps extends MapOptions, EventedProps {
   bounds?: LatLngBoundsExpression
   boundsOptions?: FitBoundsOptions
   children?: Array<VNode | string>

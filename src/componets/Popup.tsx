@@ -1,5 +1,5 @@
 import {
-  LatLngExpression,
+  LatLngTuple,
   Layer,
   Map,
   Popup as PopupMarker,
@@ -8,11 +8,10 @@ import {
 import app, { Component, VNode } from 'apprun';
 import { EventedProps } from '../types/EventedProps';
 import { ContextBased } from '../types/ContextBased';
-import { Container } from '../abstracts/Container';
+import { Container, ContainerProps } from '../abstracts/Container';
 
-export interface PopupProps extends PopupOptions, EventedProps, ContextBased<{}> {
-  children?: VNode[]
-  position?: LatLngExpression
+export interface PopupProps extends PopupOptions, EventedProps, ContextBased<{}>, ContainerProps {
+  position?: LatLngTuple
 }
 
 export class Popup extends Container<PopupMarker, PopupProps, Layer | Map> {
