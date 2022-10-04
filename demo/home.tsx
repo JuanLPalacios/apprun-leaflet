@@ -26,37 +26,32 @@ class Home extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Popup position={position || initial}>
+            {position ?
             <div>
-              I'm stand item alone popup
-            </div>
+              You clicked the map at {position.toString()}
+            </div> 
+            :<div>
+              I am a standalone popup.
+            </div>}
           </Popup>
           <Polygon latlngs={ vertexPoligon }>
             <Popup>
               <div>
-              I'm polygon item alone popup
+              I am a polygon.
               </div>
             </Popup>
           </Polygon>
           <Circle position={circlePosition} color="red" fillColor="#f03" fillOpacity={0.5} radius={500}>
             <Popup>
               <div>
-              I'm circle item alone popup
+              I am a circle.
               </div>
             </Popup>
           </Circle>
           <Marker position={mapPosition}>
             <Popup>
-              <div>
-                ayo
-                Popup for Marker
-              </div>
+              <b>Hello world!</b><br/>I am a popup.
             </Popup>
-            <Tooltip>
-              <div>
-                ayo
-              Tooltip for Marker
-              </div>
-            </Tooltip>
           </Marker>
         </Map>
       </div>

@@ -56,6 +56,11 @@ export class Map extends Component<MapContainerProps> {
         const context = this.map;
         if (node !== null && !context) {
           const map = new LeafletMap(node, state);
+          if(state.eventHandlers) map.on(state.eventHandlers);
+          map.on('popupopen', () =>
+            (map as any)._popup?._closeButton?.addEventListener('click', (event) => {
+              event.preventDefault();
+            }));
           if (center != null && zoom != null) {
             map.setView(center, zoom);
           } else if (bounds != null) {
