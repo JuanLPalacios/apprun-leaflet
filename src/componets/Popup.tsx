@@ -18,6 +18,7 @@ export class Popup extends Container<PopupMarker, PopupProps, Layer | Map> {
   createLayer(props: ContextBased<PopupProps, any>): PopupMarker {
     const popup = new PopupMarker(props)
     const {context} = props
+    if(props.position) popup.setLatLng(props.position);
     if(context instanceof Layer){
       context.bindPopup(popup);
     } else if( context instanceof Map){
@@ -28,6 +29,9 @@ export class Popup extends Container<PopupMarker, PopupProps, Layer | Map> {
   updateLayer(popup: PopupMarker, props: ContextBased<PopupProps, any>, prevProps: ContextBased<PopupProps, any>): void {
     if (props.position != null && props.position !== prevProps.position) {
       popup.setLatLng(props.position);
+    }
+    if (props.context && props.context instanceof Map) {
+      popup.openOn(props.context);
     }
   }
   
