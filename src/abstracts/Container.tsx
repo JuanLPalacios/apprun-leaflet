@@ -19,6 +19,7 @@ export abstract class Container<T extends Evented, P extends ContainerProps, E =
 
   view = (state = this.state) => {
     const context = this.context;
+    if(!Array.isArray(state.children)) state.children = [state.children]
     state.children = state.children?.map(node=>
       typeof node === 'string'?
         node :(
