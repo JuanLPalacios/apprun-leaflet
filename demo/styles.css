@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400&family=Rajdhani:wght@600;700&display=swap');
+
+/* font-family: 'Hind Madurai', sans-serif;
+font-family: 'Rajdhani', sans-serif;    
+#199900 */
+body {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  background-color: #bde76c;
+}
+
+h1,
+h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  color: #4051b5;
+}
+
+p a {
+  color: #4051b5;
+  margin-left: 29vw;
+  font-size: 1rem;
+}
+
+p a:hover {
+  color: #199900;
+}
+
+pre {
+  background-color: #f8f8f8;
+}
+
+code {
+  font-size: 1rem;
+}
+
+.wrapper {
+  width: 80vw;
+  margin: auto;
+}
+
+.map-cont {
+  width: 50vw;
+  margin: auto;
+}
+
+.anchor-p {
+  font-size: 1.5rem;
+  margin-left: 0.2rem;
+}
