@@ -27,6 +27,7 @@ h6 {
 h1 {
   text-align: center;
   color: #4051b5;
+  margin-bottom: 0;
 }
 
 p a {
@@ -60,4 +61,14 @@ code {
 .anchor-p {
   font-size: 1.5rem;
   margin-left: 0.2rem;
+}
+
+.acknowledgment {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 0;
+}
+
+.leaflet {
+  margin: 0;
 }
