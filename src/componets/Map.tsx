@@ -5,8 +5,9 @@ import {
   MapOptions,
 } from 'leaflet';
 import { app ,Component, VNode } from 'apprun';
+import { EventedProps } from '../apprun-leaflet';
 
-export interface MapContainerProps extends MapOptions {
+export interface MapContainerProps extends MapOptions, EventedProps {
   bounds?: LatLngBoundsExpression
   boundsOptions?: FitBoundsOptions
   children?: Array<VNode | string>
@@ -55,6 +56,11 @@ export class Map extends Component<MapContainerProps> {
         const context = this.map;
         if (node !== null && !context) {
           const map = new LeafletMap(node, state);
+          if(state.eventHandlers) map.on(state.eventHandlers);
+          map.on('popupopen', () =>
+            (map as any)._popup?._closeButton?.addEventListener('click', (event) => {
+              event.preventDefault();
+            }));
           if (center != null && zoom != null) {
             map.setView(center, zoom);
           } else if (bounds != null) {

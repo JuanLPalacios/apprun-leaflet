@@ -4,7 +4,7 @@ import { ContextBased } from '../types/ContextBased';
 import { EventedProps } from '../types/EventedProps';
 
 export interface ContainerProps extends EventedProps {
-    children?: Array<VNode | string>
+    children?: Array<VNode | string> | VNode | string
 }
 
 export abstract class Container<T extends Evented, P extends ContainerProps, E = any> extends Component<P> {
@@ -19,6 +19,7 @@ export abstract class Container<T extends Evented, P extends ContainerProps, E =
 
   view = (state = this.state) => {
     const context = this.context;
+    if(!Array.isArray(state.children)) state.children = [state.children]
     state.children = state.children?.map(node=>
       typeof node === 'string'?
         node :(
