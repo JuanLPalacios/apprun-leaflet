@@ -1,9 +1,11 @@
 import { Map as LeafletMap, FitBoundsOptions, LatLngBoundsExpression, MapOptions } from 'leaflet';
 import { Component, VNode } from 'apprun';
-export interface MapContainerProps extends MapOptions {
+import { EventedProps } from '../apprun-leaflet';
+export interface MapContainerProps extends MapOptions, EventedProps {
     bounds?: LatLngBoundsExpression;
     boundsOptions?: FitBoundsOptions;
     children?: Array<VNode | string>;
+    class?: string;
     className?: string;
     id?: string;
     placeholder?: VNode | string;
@@ -21,6 +23,7 @@ export declare class Map extends Component<MapContainerProps> {
         children: any[];
         bounds?: LatLngBoundsExpression;
         boundsOptions?: FitBoundsOptions;
+        class?: string;
         className?: string;
         id?: string;
         placeholder?: string | VNode;
@@ -64,5 +67,7 @@ export declare class Map extends Component<MapContainerProps> {
         tapTolerance?: number;
         touchZoom?: import("leaflet").Zoom;
         bounceAtZoomLimits?: boolean;
+        eventHandlers?: import("leaflet").LeafletEventHandlerFnMap;
     };
+    unload: (state: MapContainerProps) => void;
 }
