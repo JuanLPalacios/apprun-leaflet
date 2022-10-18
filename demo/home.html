@@ -1,0 +1,38 @@
+<h1 id="apprun-leaflet">apprun-leaflet</h1>
+<p>simple Apprun JSX Wraper for leaflet</p>
+<h2 id="getting-started">Getting started</h2>
+<ul>
+<li>install the package<pre><code>npm install --save https://github.com/JuanLPalacios/apprun-leaflet.git
+</code></pre>
+</li>
+<li>add Leaflet CSS file in the head section of your page:<pre><code> &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet@1.8.0/dist/leaflet.css&quot;
+integrity=&quot;sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==&quot;
+crossorigin=&quot;&quot;/&gt;
+</code></pre>
+</li>
+<li>add a map component to your jsx:<pre><code>&lt;div&gt;
+     &lt;Map center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} className=&quot;map-cont&quot; style={{ height:&#39;400px&#39; }}&gt;
+       &lt;TileLayer
+         attribution=&#39;&amp;copy; &lt;a href=&quot;https://www.openstreetmap.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#39;
+         url=&quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;
+       /&gt;
+       &lt;Marker position={[51.505, -0.09]}/&gt;
+     &lt;/Map&gt;
+</code></pre>
+</li>
+</ul>
+<h2 id="built-with">Built With</h2>
+<ul>
+<li>TypeScript</li>
+<li>Apprun</li>
+<li>Leaflet</li>
+</ul>
+<h2 id="author">Author</h2>
+<p>👤 <strong>Juan Luis Palacios</strong></p>
+<ul>
+<li>GitHub: <a href="https://github.com/JuanLPalacios">@JuanLPalacios</a></li>
+<li>Twitter: <a href="https://twitter.com/twitterhandle">@JuanLuisPalac20</a></li>
+<li>LinkedIn: <a href="https://www.linkedin.com/in/juan-luis-palacios-p%C3%A9rez-95b39a228/">LinkedIn</a></li>
+</ul>
+<h2 id="license">License</h2>
+<p>This project is <a href="./LICENSE">MIT</a> licensed.</p>

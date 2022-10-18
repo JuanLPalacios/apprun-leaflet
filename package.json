@@ -1,6 +1,6 @@
 {
   "name": "apprun-leaflet",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "simple Apprun JSX Wraper for leaflet",
   "main": "dist/apprun-leaflet.js",
   "module": "dist/apprun-leaflet.esm.js",
@@ -11,7 +11,7 @@
     "build": "tsc -p src && rollup -c && webpack --mode production",
     "test": "jest --watch",
     "start": "webpack serve --mode development",
-    "build:docs": "marked -i README.md -o demo/home.html & marked -i WHATSNEW.md -o demo/new.html",
+    "build:docs": "marked -i README.md -o demo/home.html & marked -i CHANGELOG.md -o demo/change.html",
     "rollup": "tsc -p src && rollup -c"
   },
   "repository": {

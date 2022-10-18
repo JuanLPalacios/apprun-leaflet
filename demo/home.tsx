@@ -81,7 +81,7 @@ class Home extends Component {
             
             - install the package
               ~~~
-                npm install --save https://github.com/JuanLPalacios/apprun-leaflet.git
+                npm install --save apprun-leaflet
               ~~~
             
             - add Leaflet CSS file in the head section of your page:

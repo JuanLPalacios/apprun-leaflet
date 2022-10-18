@@ -1,38 +1,11 @@
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-/* eslint-disable eqeqeq */
 import { Marker as LeafletMarker, } from 'leaflet';
-import app, { Component } from 'apprun';
-export class Marker extends Component {
-    constructor(props, ...p) {
-        super(props, ...p);
-        this.view = (state = this.state) => {
-            return app.createElement("div", null, state.children);
-        };
-        this.mounted = (props, children, state) => {
-            var _a;
-            const { context } = state;
-            state.children = (_a = state.children) === null || _a === void 0 ? void 0 : _a.map(node => node.tag.prototype instanceof Component ? Object.assign(Object.assign({}, node), { props: Object.assign(Object.assign({}, node.props), { context }) }) : node);
-            this.updateMarker(this.marker, props, state);
-            return Object.assign(Object.assign({}, props), { children });
-        };
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { position, children } = props, options = __rest(props, ["position", "children"]);
-        this.marker = new LeafletMarker(position, options);
-        if (props.context) {
-            this.marker.addTo(props.context);
-        }
+import { Container } from '../abstracts/Container';
+export class Marker extends Container {
+    createLayer(props) {
+        const { position } = props;
+        return new LeafletMarker(position, props).addTo(props.context);
     }
-    updateMarker(marker, props, prevProps) {
+    updateLayer(marker, props, prevProps) {
         if (props.context !== prevProps.context) {
             if (prevProps.context) {
                 marker.remove();

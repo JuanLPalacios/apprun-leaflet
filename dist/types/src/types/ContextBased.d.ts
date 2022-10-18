@@ -1,3 +1,3 @@
-export declare type ContextBased<T> = T & {
-    context?: any;
+export declare type ContextBased<T, E = any> = T & {
+    context?: E;
 };
