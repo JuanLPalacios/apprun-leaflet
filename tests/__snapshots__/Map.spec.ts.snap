@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map renders 1`] = `
+"[
+  {
+    \\"tag\\": \\"div\\",
+    \\"props\\": {},
+    \\"children\\": []
+  },
+  {
+    \\"tag\\": \\"div\\",
+    \\"props\\": {
+      \\"style\\": {
+        \\"display\\": \\"none\\"
+      }
+    },
+    \\"children\\": []
+  }
+]"
+`;
